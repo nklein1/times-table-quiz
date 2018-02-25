@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+input[type="text"] {
+  border-style: none;
+}
+
+
+.input {
+  display: inline-block;
+  background-color: transparent;
+  flex: 1;
+  min-width: 0;
+  text-overflow: ellipsis;
+  padding: 8px;
+  max-width: 5em;
+}
+
+.tbd {
+  background-color: #fff;
+  color: #000;
+  cursor: text;
+}
+
+.correct {
+  background-color: #009900;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.legend {
+  background-color: #ffff00;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.incorrect {
+  background-color: #cc0000;
+  color: #fff;
+  cursor: text;
+}
