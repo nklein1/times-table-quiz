@@ -3,20 +3,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import TableCell from 'components/TableCell/TableCell.jsx';
-
 import styles from './TableRow.scss';
 
 class TableRow extends React.Component {
-  // static propTypes = {
-  //     // className: PropTypes.string,
-  //     // href: PropTypes.string.isRequired,
-  //     // queries: PropTypes.object
-  // }
-
-  // static defaultProps = {
-  //     // className: ``,
-  //     // queries: {}
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (

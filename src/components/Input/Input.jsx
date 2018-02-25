@@ -1,16 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+
 import styles from './Input.scss';
 
-export default class Input extends React.Component {
-
+class Input extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //     value: this.props.value
-    // }
   }
 
   checkStatusStyle() {
@@ -41,3 +37,6 @@ export default class Input extends React.Component {
     );
   }
 }
+
+export { Input };
+export default Input;

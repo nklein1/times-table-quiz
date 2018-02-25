@@ -14,11 +14,9 @@ class TableCell extends React.Component {
       readOnly: (this.props.status == 'legend'),
       value: ''
     }
-
-    this.validateInput = this.validateInput.bind(this);
   }
 
-  validateInput(ev) {
+  validateInput = (ev) => {
     if (isNaN(ev.currentTarget.value)) {
       return;
     }
@@ -28,11 +26,13 @@ class TableCell extends React.Component {
         status: 'correct',
         readOnly: true
       });
+      this.props.correctInput();
     } else {
       this.setState({
         status: 'incorrect',
         readOnly: false
       });
+      this.props.incorrectInput();
     }
   }
 

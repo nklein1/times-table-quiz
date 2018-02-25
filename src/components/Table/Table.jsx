@@ -14,17 +14,33 @@ class Table extends React.Component {
       totalCells: this.props.tableSize*this.props.tableSize-(this.props.tableSize*2)-1,
       finishedCells: 0
     }
-
-    console.log('this.state.totalCells');
-    console.log(this.state.totalCells);
   }
 
-  _successCallback() {
-    this.setState({finishedCells: finishedCells++});
+
+  // TODO: Combine correctInput & incorrectInput
+  anyInput = () => {
+    if (!this.props.timerRunning) {
+      this.props.startTimer();
+    // }
+    // } else if (this.state.finishedCells == this.state.totalCells) {
+    // TODO TEMP FOR TESTING
+    } else if (this.state.finishedCells == 3) {
+      this.props.stopTimer();
+    }
   }
 
-  _generateTableRow(row, tableSize, numCells) {
-    // let numCells = this.state.totalCells;
+  correctInput = () => {
+    this.setState(
+      { finishedCells: this.state.finishedCells + 1 },
+      () => this.anyInput()
+    );
+  }
+
+  incorrectInput = () => {
+    this.anyInput();
+  }
+
+  _generateTableRow = (row, tableSize, numCells) => {
     var cells = [];
     for (let column = 1; column < tableSize+1; column++) {
       if (column == 1 || row == 1) {
@@ -43,7 +59,8 @@ class Table extends React.Component {
               targetValue={row*column}
               status={'tbd'}
               key={numCells--}
-              success={this._successCallback}
+              correctInput={this.correctInput}
+              incorrectInput={this.incorrectInput}
           />
         );
       }
@@ -51,13 +68,13 @@ class Table extends React.Component {
     return cells;
   }
 
-  _generateTable(tableSize) {
+  _generateTable = (tableSize) => {
     let numCells = this.state.totalCells;
     var rows = [];
     for (let i = 1; i < tableSize+1; i++) {
       rows.push(
         <tr className={styles.row}>
-        {this._generateTableRow(i, tableSize, numCells)}
+        { this._generateTableRow(i, tableSize, numCells) }
         </tr>
       );
     }

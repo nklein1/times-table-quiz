@@ -2,27 +2,74 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-// import TableRow from 'components/TableRow/TableRow.jsx';
-
 import styles from './Timer.scss';
 
 class Timer extends React.Component {
-    // static propTypes = {
-    //     // className: PropTypes.string,
-    //     // href: PropTypes.string.isRequired,
-    //     // queries: PropTypes.object
-    // }
+  constructor(props) {
+    super(props);
 
-    // static defaultProps = {
-    //     // className: ``,
-    //     // queries: {}
-    // }
-
-    render() {
-        return (
-            <span>TIMER HERE</span>
-        );
+    this.state = {
+      intervalId: '',
+      initialTime: 0,
+      seconds: '00',
+      minutes: '00'
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.timerRunning == true) {
+      this.initTimer();
+    } if (nextProps.timerRunning == false) {
+      this.stopTimer();
+    }
+  }
+
+  initTimer = () => {
+    this.setState(
+      { initialTime: Date.now() }, 
+      this.startTimer
+    );
+  }
+
+  startTimer = () => {
+    const intervalId = setInterval(this.runTimer, 1000);
+    this.setState({ intervalId: intervalId });
+  }
+
+  stopTimer = () => {
+    clearTimeout(this.state.intervalId);
+  }
+
+  formatTime = (time) => {
+    if (time < 10) {
+      return '0'+time;
+    } else {
+      return time;
+    }
+  }
+
+  runTimer = () => {
+    let timeDifference = Date.now() - this.state.initialTime;
+    let totalSeconds = Math.floor(timeDifference/1000);
+    let minutes = Math.floor(totalSeconds/60);
+    let seconds = totalSeconds - minutes * 60;
+    this.setState({
+      minutes: this.formatTime(minutes),
+      seconds: this.formatTime(seconds)
+    })
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.state.intervalId);
+  }
+
+  render() {
+    return (
+      <div>
+        <span>{ this.state.minutes }</span>:<span>{ this.state.seconds }</span>
+      </div>
+    );
+  }
 }
 
 export { Timer };
