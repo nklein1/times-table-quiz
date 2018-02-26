@@ -16,8 +16,6 @@ class Table extends React.Component {
     }
   }
 
-
-  // TODO: Combine correctInput & incorrectInput
   anyInput = () => {
     if (!this.props.timerRunning) {
       this.props.startTimer();
@@ -31,7 +29,7 @@ class Table extends React.Component {
 
   correctInput = () => {
     this.setState(
-      { finishedCells: this.state.finishedCells + 1 },
+      { finishedCells: this.state.finishedCells+1 },
       () => this.anyInput()
     );
   }
@@ -44,7 +42,6 @@ class Table extends React.Component {
     var cells = [];
     for (let column = 1; column < tableSize+1; column++) {
       if (column == 1 || row == 1) {
-        // TODO: Keys need to be unique
         cells.push(
           <TableCell 
               targetValue={row*column}
@@ -73,8 +70,8 @@ class Table extends React.Component {
     var rows = [];
     for (let i = 1; i < tableSize+1; i++) {
       rows.push(
-        <tr className={styles.row}>
-        { this._generateTableRow(i, tableSize, numCells) }
+        <tr className={styles.row} key={'tr-'+i}>
+        { this._generateTableRow(i, tableSize, numCells*i) }
         </tr>
       );
     }
