@@ -2,16 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import TableCell from 'components/TableCell/TableCell.jsx';
+import TableCell from '../TableCell/TableCell.jsx';
 
-import styles from './Table.scss';
+import styles from './Table.module.scss';
 
 class Table extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      totalCells: this.props.tableSize*this.props.tableSize-(this.props.tableSize*2)-1,
+      totalCells: this.props.tableSize*this.props.tableSize-((this.props.tableSize*2)-1),
       finishedCells: 0
     }
   }
@@ -20,9 +20,9 @@ class Table extends React.Component {
     if (!this.props.timerRunning) {
       this.props.startTimer();
     // }
-    // } else if (this.state.finishedCells == this.state.totalCells) {
+    } else if (parseInt(this.state.finishedCells) === parseInt(this.state.totalCells)) {
     // TODO TEMP FOR TESTING
-    } else if (this.state.finishedCells == 3) {
+    // } else if (this.state.finishedCells === 3) {
       this.props.stopTimer();
     }
   }
@@ -41,7 +41,7 @@ class Table extends React.Component {
   _generateTableRow = (row, tableSize, numCells) => {
     var cells = [];
     for (let column = 1; column < tableSize+1; column++) {
-      if (column == 1 || row == 1) {
+      if (column === 1 || row === 1) {
         cells.push(
           <TableCell 
               targetValue={row*column}
@@ -79,6 +79,8 @@ class Table extends React.Component {
   }
 
   render() {
+    console.log('this.props.tableSize', this.props.tableSize);
+    console.log(this.props.tableSize * this.props.tableSize - ((this.props.tableSize * 2)));
     return (
       <table>
         <tbody>

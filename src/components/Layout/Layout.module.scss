@@ -1,0 +1,37 @@
+@import '../../scss/variables.module.scss';
+
+
+.header {
+  background-color: $white;
+  color: $black;
+
+  padding: 1rem 1rem;
+  width: 100%;
+  span {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+}
+
+.container {
+  padding: 1rem;
+  background-color: $lighterGrey;
+
+  .title {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+@media screen and (max-width: $mdBreakpoint) {
+	.footer {
+	  position: relative;
+	  padding: 1rem 0 0 1rem;
+	  bottom: 0px;
+	}
+}

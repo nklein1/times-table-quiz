@@ -1,0 +1,57 @@
+@import '../../scss/variables.module.scss';
+
+.tableCell {
+  border: 1px solid $lighterGrey;
+  text-align: left;
+
+  input[type="text"] {
+    outline: none;
+    border-style: none;
+    border-image-width: 0px;
+    -webkit-border-horizontal-spacing: 0px;
+    -webkit-border-vertical-spacing: 0px;
+    -webkit-box-shadow: none;
+  box-shadow: none;
+
+    &:focus{
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  .input {
+    display: inline-block;
+    background-color: transparent;
+    flex: 1;
+    min-width: 0;
+    text-overflow: ellipsis;
+    padding: 8px;
+    max-width: 5em;
+  }
+
+  .tbd {
+    background-color: $white;
+    color: $black;
+    cursor: text;
+  }
+
+  .correct {
+    background-color: $green;
+    color: $white;
+    cursor: not-allowed;
+  }
+
+  .legend {
+    background-color: $yellow;
+    color: $black;
+    font-weight: 700;
+    cursor: not-allowed;
+  }
+
+  .incorrect {
+    background-color: $red;
+    color: $white;
+    cursor: text;
+  }
+}

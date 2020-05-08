@@ -1,0 +1,57 @@
+
+// Master Color Palette
+$yellow: #F9C74F;
+$red: #F94144;
+$green: #90BE6D;
+$medRed: #AD302D;
+
+$medRed: #AD302D;
+
+$black: #222;
+$offBlack: #262525;
+$semiTransparentBlack: #000000B5;
+
+$white: #FFF;
+$lighterWhite: #F6F4F4;
+$offWhite: #F1F1F1;
+
+$lighterGrey: #EFEFEF;
+$lightGrey: #CED4DA;
+$mdGrey: #666;
+
+$brightYellow: #F9EA06;
+$faintYellow: #FCF9DE;
+
+// Theme Colors
+$lightGreyBorder: $lightGrey;
+$lightGreyBg: $lighterGrey;
+$callToAction: $red;
+
+// Dimensions
+$smBreakpoint: 400px;
+$mdBreakpoint: 700px;
+$lgBreakpoint: 1124px;
+
+$smWidth: 85%;
+$mdWidth: 730px;
+$lgWidth: 980px;
+$xlWidth: 1180px;
+
+$defaultLineHeight: 1em;
+$defaultFont: Roboto, sans-serif;
+
+html {
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #4686AA;
+  cursor: pointer;
+}
+
+body {
+  margin: 0px;
+  background-color: $lighterGrey;
+}

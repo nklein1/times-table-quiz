@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './Timer.scss';
+import styles from './Timer.module.scss';
 
 class Timer extends React.Component {
   constructor(props) {
@@ -17,9 +17,9 @@ class Timer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.timerRunning == true) {
+    if (nextProps.timerRunning === true) {
       this.initTimer();
-    } if (nextProps.timerRunning == false) {
+    } if (nextProps.timerRunning === false) {
       this.stopTimer();
     }
   }
@@ -65,9 +65,9 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <div>
-        <span>{ this.state.minutes }</span>:<span>{ this.state.seconds }</span>
-      </div>
+      <span>
+        { this.state.minutes }:{ this.state.seconds }
+      </span>
     );
   }
 }

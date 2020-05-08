@@ -1,17 +1,17 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Input from 'components/Input/Input.jsx';
-import styles from './TableCell.scss';
+import styles from './TableCell.module.scss';
 
 class TableCell extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      status: 'tbd',
+      status: (this.props.status === 'legend') ? 'legend' : 'tbd',
+      readOnly: (this.props.status === 'legend'),
       optionPosition: 0,
-      readOnly: (this.props.status == 'legend'),
       value: ''
     }
   }
@@ -21,7 +21,7 @@ class TableCell extends React.Component {
       return;
     }
     this.setState({value: ev.currentTarget.value})
-    if (ev.currentTarget.value == this.props.targetValue) {
+    if (parseInt(ev.currentTarget.value) === parseInt(this.props.targetValue)) {
       this.setState({
         status: 'correct',
         readOnly: true
@@ -39,12 +39,15 @@ class TableCell extends React.Component {
   render() {
     return (
       <td className={styles.tableCell}>
-        <Input
+        <input
             type={'text'}
-            status={this.state.status}
+            className={classNames(
+                styles.input,
+                this.state.status ? styles[this.state.status] : ''
+            )}
+            value={(this.props.status === 'legend') ? this.props.targetValue : this.state.value}
             onChange={this.validateInput}
             readOnly={this.state.readOnly}
-            value={(this.props.status == 'legend') ? this.props.targetValue : this.state.value}
         />
       </td>
     );

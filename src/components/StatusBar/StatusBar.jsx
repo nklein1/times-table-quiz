@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import Button from 'components/Button/Button.jsx';
-import Timer from 'components/Timer/Timer.jsx';
-import styles from './StatusBar.scss';
+import Button from '../Button/Button.jsx';
+import Timer from '../Timer/Timer.jsx';
+import styles from './StatusBar.module.scss';
 
 class StatusBar extends React.Component {
 
