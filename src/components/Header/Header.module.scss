@@ -1,88 +1,19 @@
 @import '../../scss/variables.module.scss';
 
-.appbar {
+.outer {
   background-color: $white;
   color: $black;
-
-  padding: 1rem 1rem;
   width: 100%;
-  span {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
 
-  .toolbar {
+  .inner {
+    padding: 1rem 1rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
 
-    .title {
-      margin: 0 1rem;
-      color: $mdGrey;
-      font-size: 1.5rem;
-
-      strong {
-        color: $black;
-      }
+    span {
+      font-size: 1.2rem;
+      font-weight: 700;
     }
-
-    .anchor {
-      margin-left: 1rem;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .tabs {
-      min-height: 64px;
-      color: $black;
-      margin-left: 1rem;
-      text-decoration: none;
-      color: inherit;
-
-      &.active {
-        border-bottom: 4px solid $black;
-      }
-    }
-
-    .tabIndicator {
-      background-color: $black;
-      height: 4px;
-    }
-  }
-}
-
-.drawer {
-  min-width: 50vw;
-
-  .title {
-    color: $black;
-  }
-}
-
-.mobile {
-  display: none;
-}
-
-.desktop {
-  display: initial;
-}
-
-@media screen and (max-width: $mdBreakpoint) {
-  .appbar {
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-  }
-
-  .mobile {
-    display: initial;
-  }
-
-  .desktop {
-    display: none;
   }
 }

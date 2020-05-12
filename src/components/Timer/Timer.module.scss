@@ -1,14 +1,21 @@
 @import '../../scss/variables.module.scss';
 
-.timer {
-  font-size: 1rem;
+.container {
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  font-weight: 300;
 
-  &.isRunning {
-    color: $mdGrey;
-  }
-
-  &.isComplete {
-    color: $green;
+  .timer {
+    font-size: 1.2rem;
     font-weight: 700;
+    margin-left: 0.5rem;
+
+    &.isRunning {
+      color: $mdGrey;
+    }
+
+    &.isComplete {
+      color: $green;
+    }
   }
 }

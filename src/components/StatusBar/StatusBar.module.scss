@@ -1,9 +1,12 @@
+@import '../../scss/variables.module.scss';
+
 .container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding: 0.5rem 1rem;
 
   .rightContainer  {
     display: flex;
@@ -20,22 +23,20 @@
       }
 
       .input  {
-        display: block;
+        // display: block;
         width: 100%;
-        // height: calc(1.25rem + .75rem + 2px);
-        padding: .5rem .75rem;
+        padding: 0.5rem 0.75rem;
         font-size: 1rem;
         font-weight: 400;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
+        color: $black;
+        background-color: $white;
         background-clip: padding-box;
-        border: 1px solid #ced4da;
+        border: 1px solid $lightGrey;
         border-radius: .25rem;
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
         &:disabled, &[readonly] {
-          background-color: #e9ecef;
+          background-color: $disabledGrey;
           opacity: 1;
         }
       }

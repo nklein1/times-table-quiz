@@ -2,33 +2,24 @@ import React from 'react';
 // import classNames from 'classnames';
 // import PropTypes from 'prop-types';
 
-import { StopwatchContext } from '../../utils/stopwatch-context.jsx';
-
 import Table from '../Table/Table.jsx';
 import StatusBar from '../StatusBar/StatusBar.jsx';
-import styles from './Quiz.scss';
+import styles from './Quiz.module.scss';
 
-class Quiz extends React.Component {
+class Quiz extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-        tableSize: 4,
-        totalCells: 9,
+        tableSize: 12,
+        // totalCells: 9,
+        totalCells: 121,
         finishedCells: 0,
         seconds: '00',
         minutes: '0',
         hours: '',
         isRunning: false,
-        isComplete: false,
-        initTimer: this.initTimer,
-        startTimer: this.startTimer,
-        stopTimer: this.stopTimer,
-        resetTable: this.resetTable,
-        resizeTable: this.resizeTable,
-        completeTable: this.completeTable,
-        correctInput: this.correctInput,
-        incorrectInput: this.incorrectInput,
+        isComplete: false
     }
   }
 
@@ -127,16 +118,27 @@ class Quiz extends React.Component {
 
   render() {
     return (
-      <StopwatchContext.Provider value={this.state}>
-        <div className={styles.container}>
-          <StatusBar className={styles.statusbar} />
+      <div className={styles.container}>
+        <StatusBar 
+            className={styles.statusbar}
+            isComplete={this.state.isComplete}
+            isRunning={this.state.isRunning}
+            tableSize={this.state.tableSize}
+            minutes={this.state.minutes}
+            seconds={this.state.seconds}
+            resizeTable={this.resizeTable}
+            resetTable={this.resetTable}
+         />
+        <div className={styles.table}>
           <Table 
-              className={styles.table}
-              tableSize={this.state.tableSize}
               tableComplete={this.state.isComplete}
+              totalCells={this.state.totalCells}
+              tableSize={this.state.tableSize}
+              correctInput={this.correctInput}
+              incorrectInput={this.incorrectInput}
           />
         </div>
-      </StopwatchContext.Provider>
+      </div>
     );
   }
 }

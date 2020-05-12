@@ -19,8 +19,8 @@ const Layout = ({ children, title, pathname }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div className={styles.container}>
-        <main>{children}</main>
+      <div className={styles.outer}>
+        <main className={styles.inner}>{children}</main>
         <footer className={styles.footer}>
           © {new Date().getFullYear()} Nick Klein
         </footer>
