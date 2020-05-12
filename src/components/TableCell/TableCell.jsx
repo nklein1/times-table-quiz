@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
+import { StopwatchContext } from '../../utils/stopwatch-context.jsx';
 import styles from './TableCell.module.scss';
 
 class TableCell extends React.Component {
@@ -17,6 +18,7 @@ class TableCell extends React.Component {
   }
 
   validateInput = (ev) => {
+    let stopwatch = this.context;
     if (isNaN(ev.currentTarget.value)) {
       return;
     }
@@ -26,13 +28,13 @@ class TableCell extends React.Component {
         status: 'correct',
         readOnly: true
       });
-      this.props.correctInput();
+      stopwatch.correctInput();
     } else {
       this.setState({
         status: 'incorrect',
         readOnly: false
       });
-      this.props.incorrectInput();
+      stopwatch.incorrectInput();
     }
   }
 
@@ -53,6 +55,8 @@ class TableCell extends React.Component {
     );
   }
 }
+
+TableCell.contextType = StopwatchContext;
 
 export { TableCell };
 export default TableCell;

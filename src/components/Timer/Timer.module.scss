@@ -1,0 +1,14 @@
+@import '../../scss/variables.module.scss';
+
+.timer {
+  font-size: 1rem;
+
+  &.isRunning {
+    color: $mdGrey;
+  }
+
+  &.isComplete {
+    color: $green;
+    font-weight: 700;
+  }
+}

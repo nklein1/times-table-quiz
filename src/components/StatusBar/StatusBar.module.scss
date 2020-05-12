@@ -4,4 +4,41 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  .rightContainer  {
+    display: flex;
+    align-items: center;
+
+    .inputContainer  {
+      display: flex;
+      align-items: center;
+      margin: 0 1rem;
+
+      .label {
+        white-space: nowrap;
+        margin: 0 0.5rem;
+      }
+
+      .input  {
+        display: block;
+        width: 100%;
+        // height: calc(1.25rem + .75rem + 2px);
+        padding: .5rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+        &:disabled, &[readonly] {
+          background-color: #e9ecef;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }

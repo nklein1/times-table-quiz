@@ -1,45 +1,47 @@
 import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
+import { StopwatchContext } from '../../utils/stopwatch-context.jsx';
 import TableCell from '../TableCell/TableCell.jsx';
-
 import styles from './Table.module.scss';
 
 class Table extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      totalCells: this.props.tableSize*this.props.tableSize-((this.props.tableSize*2)-1),
-      finishedCells: 0
-    }
-  }
-
-  anyInput = () => {
-    if (!this.props.timerRunning) {
-      this.props.startTimer();
+    // this.state = {
+    //   totalCells: this.props.tableSize*this.props.tableSize-((this.props.tableSize*2)-1),
+    //   finishedCells: 0
     // }
-    } else if (parseInt(this.state.finishedCells) === parseInt(this.state.totalCells)) {
-    // TODO TEMP FOR TESTING
-    // } else if (this.state.finishedCells === 3) {
-      this.props.stopTimer();
-    }
   }
 
-  correctInput = () => {
-    this.setState(
-      { finishedCells: this.state.finishedCells+1 },
-      () => this.anyInput()
-    );
-  }
+  // anyInput = () => {
+  //   let stopwatch = this.context;
+  //   if (!stopwatch.isRunning) {
+  //     stopwatch.initTimer();
+  //   // } else if (parseInt(this.state.finishedCells) === parseInt(this.state.totalCells)) {
+  //   } else if (parseInt(stopwatch.finishedCells) === parseInt(stopwatch.totalCells)) {
+  //     stopwatch.completeTable();
+  //   }
+  // }
 
-  incorrectInput = () => {
-    this.anyInput();
-  }
+  // correctInput = () => {
+  //   this.setState(
+  //     // { finishedCells: this.state.finishedCells+1 },
+  //     { finishedCells: stopwatch.finishedCells + 1 },
+  //     () => this.anyInput()
+  //   );
+  // }
+
+  // incorrectInput = () => {
+  //   this.anyInput();
+  // }
 
   _generateTableRow = (row, tableSize, numCells) => {
-    var cells = [];
+
+    let stopwatch = this.context;
+
+    let cells = [];
     for (let column = 1; column < tableSize+1; column++) {
       if (column === 1 || row === 1) {
         cells.push(
@@ -56,8 +58,8 @@ class Table extends React.Component {
               targetValue={row*column}
               status={'tbd'}
               key={numCells--}
-              correctInput={this.correctInput}
-              incorrectInput={this.incorrectInput}
+              correctInput={stopwatch.correctInput}
+              incorrectInput={stopwatch.incorrectInput}
           />
         );
       }
@@ -66,8 +68,11 @@ class Table extends React.Component {
   }
 
   _generateTable = (tableSize) => {
-    let numCells = this.state.totalCells;
-    var rows = [];
+    let stopwatch = this.context;
+    
+    // let numCells = this.state.totalCells;
+    let numCells = stopwatch.totalCells;
+    let rows = [];
     for (let i = 1; i < tableSize+1; i++) {
       rows.push(
         <tr className={styles.row} key={'tr-'+i}>
@@ -79,8 +84,6 @@ class Table extends React.Component {
   }
 
   render() {
-    console.log('this.props.tableSize', this.props.tableSize);
-    console.log(this.props.tableSize * this.props.tableSize - ((this.props.tableSize * 2)));
     return (
       <table>
         <tbody>
@@ -90,6 +93,8 @@ class Table extends React.Component {
     );
   }
 }
+
+Table.contextType = StopwatchContext;
 
 export { Table };
 export default Table;

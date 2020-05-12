@@ -1,43 +1,42 @@
 import React from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+
+import { StopwatchContext } from '../../utils/stopwatch-context.jsx';
 
 import Button from '../Button/Button.jsx';
 import Timer from '../Timer/Timer.jsx';
 import styles from './StatusBar.module.scss';
 
-class StatusBar extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      timerRunning: this.props.timerRunning
-    }
-  }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.timerRunning == true) {
-  //     this.initTimer();
-  //   } if (nextProps.timerRunning == false) {
-  //     stopTimer(this.state.intervalId);
-  //   }
-  // }
-
-  stopTimer = () => {
-
-  }
-
-  render() {
-    return(
-      <div className={styles.container}>
-        <Timer timerRunning={this.props.timerRunning}></Timer>
-        <div>
-        <Button onClick={this.stopTimer}></Button>
+const StatusBar = () => {
+  return(
+    <StopwatchContext.Consumer>
+      {({tableSize, resizeTable, isRunning}) => (
+        <div className={styles.container}>
+          <Timer />
+          <div className={styles.rightContainer}>
+            <form className={styles.inputContainer}>
+              <label htmlFor={'tableSize'} className={styles.label}>Table Size:</label>
+              <input
+                  id={'tableSize'}
+                  name={'tableSize'}
+                  type={'number'}
+                  min={2}
+                  max={100}
+                  className={classNames(
+                      styles.input,
+                      isRunning === true ? styles.disabled : ''
+                  )}
+                  defaultValue={tableSize}
+                  onChange={resizeTable}
+                  readOnly={isRunning}
+              />
+            </form>
+            <Button>Reset Table</Button>
+          </div>
         </div>
-      </div>
-    );
-  }
+      )}
+    </StopwatchContext.Consumer>
+  );
 }
 
 export { StatusBar };

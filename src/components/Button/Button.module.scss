@@ -8,10 +8,8 @@
   font-family: $defaultFont;
   font-weight: 700;
   // letter-spacing: 1px;
-  background-color: $red;
-  // text-transform: uppercase;
+  background-color: $lightGrey;
   transition: background-color .25s ease-in-out;
-  cursor: pointer;
 
   .spinner {
     font-size: 20px;
@@ -32,6 +30,27 @@
 
   &:hover, &:active {
     color: $white;
-    background-color: $medRed;
+    background-color: $lightGrey;
+  }
+
+  &.isRunning {
+    background-color: $red;
+    cursor: pointer;
+
+    &:hover, &:active {
+      color: $white;
+      background-color: darken($red, 10%);
+    }
+  }
+
+  &.isComplete {
+    background-color: $green;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover, &:active {
+      color: $white;
+      background-color: darken($green, 10%);
+    }
   }
 }

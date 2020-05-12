@@ -7,11 +7,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { globalHistory } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby';
 
-function SEO({ description, lang, meta, title, breadcrumbs, pathname }) {
+function SEO({ description, lang, meta, title, pathname }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -30,30 +30,30 @@ function SEO({ description, lang, meta, title, breadcrumbs, pathname }) {
   const metaDescription = description || site.siteMetadata.description;
   const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null;
 
-  const baseSchema = [
+  const schemaJSONLD = [
     {
       '@context': 'http://schema.org',
       '@type': 'WebSite',
       'url': globalHistory.location.origin,
-      name: title,
+      'name': title,
     },
   ];
 
-  const schemaJSONLD = breadcrumbs ? [
-    ...baseSchema,
-    {
-      '@context': 'http://schema.org',
-      '@type': 'BreadcrumbList',
-      'itemListElement': breadcrumbs.map((breadcrumb, index) => (
-        {
-          '@type': 'ListItem',
-          'position': index,
-          'name': breadcrumb.title,
-          'item': globalHistory.location.origin + breadcrumb.url
-        }
-      ))
-    }
-  ] : baseSchema;
+  // const schemaJSONLD = breadcrumbs ? [
+  //   ...baseSchema,
+  //   {
+  //     '@context': 'http://schema.org',
+  //     '@type': 'BreadcrumbList',
+  //     'itemListElement': breadcrumbs.map((breadcrumb, index) => (
+  //       {
+  //         '@type': 'ListItem',
+  //         'position': index,
+  //         'name': breadcrumb.title,
+  //         'item': globalHistory.location.origin + breadcrumb.url
+  //       }
+  //     ))
+  //   }
+  // ] : baseSchema;
 
   return (
     <Helmet
@@ -117,7 +117,6 @@ SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  breadcrumbs: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
   pathname: PropTypes.string,
 }
