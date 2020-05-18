@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Times Table Quiz`,
-    description: `A simple multiplication table quiz.`,
+    title: `Learn To Multiply`,
+    description: `Learn to multiply with this simple multiplication table quiz.`,
     author: `Nick Klein`,
-    siteUrl: `http://www.nklein.info`
+    siteUrl: `http://www.learntomultiply.com`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -32,7 +32,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: `UA-38789595-2`,
+        trackingId: `UA-38789595-3`,
       },
     },
     {

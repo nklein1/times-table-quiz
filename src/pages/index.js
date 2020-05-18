@@ -6,7 +6,7 @@ import SEO from '../components/seo';
 
 const IndexPage = (props) => (
   <Layout>
-    <SEO title={'Home'} pathname={props.path} />
+    <SEO title={'Learn to Multiply | Times Table Quiz'} pathname={props.path} />
     <Quiz />
   </Layout>
 )

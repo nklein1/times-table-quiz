@@ -39,22 +39,6 @@ function SEO({ description, lang, meta, title, pathname }) {
     },
   ];
 
-  // const schemaJSONLD = breadcrumbs ? [
-  //   ...baseSchema,
-  //   {
-  //     '@context': 'http://schema.org',
-  //     '@type': 'BreadcrumbList',
-  //     'itemListElement': breadcrumbs.map((breadcrumb, index) => (
-  //       {
-  //         '@type': 'ListItem',
-  //         'position': index,
-  //         'name': breadcrumb.title,
-  //         'item': globalHistory.location.origin + breadcrumb.url
-  //       }
-  //     ))
-  //   }
-  // ] : baseSchema;
-
   return (
     <Helmet
       htmlAttributes={{
