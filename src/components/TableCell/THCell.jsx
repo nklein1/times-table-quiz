@@ -6,7 +6,10 @@ import styles from './TableCell.module.scss';
 
 const THCell = React.memo(function THCell({targetValue, status, type}) {
   return (
-    <th className={styles.tableCell}>
+    <th className={classNames(
+        styles.tableCell,
+        type ? styles[type] : ''
+      )}>
       <input
           type={'text'}
           className={classNames(

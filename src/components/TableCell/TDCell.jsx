@@ -9,10 +9,17 @@ class TableCell extends React.PureComponent {
     super(props);
 
     this.state = {
-      status: (this.props.status === 'legend') ? 'legend' : 'tbd',
-      readOnly: (this.props.status === 'legend'),
+      status: '',
+      readOnly: '',
       value: ''
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      status: (this.props.status === 'legend') ? 'legend' : 'tbd',
+      readOnly: (this.props.status === 'legend')
+    });
   }
 
   parseInput = (ev) => {

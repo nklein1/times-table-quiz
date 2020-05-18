@@ -4,11 +4,16 @@ th {
   position: -webkit-sticky;
   position: sticky !important;
   left: 0;
+  z-index: 100;
 }
 
 .tableCell {
   border: 1px solid $lighterGrey;
   text-align: left;
+
+  &.legendCol {
+    z-index: 50;
+  }
 
   input[type="text"] {
     outline: none;

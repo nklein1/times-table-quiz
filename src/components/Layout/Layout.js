@@ -22,7 +22,7 @@ const Layout = ({ children, title, pathname }) => {
       <div className={styles.outer}>
         <main className={styles.inner}>{children}</main>
         <footer className={styles.footer}>
-          © {new Date().getFullYear()} Nick Klein
+          © {new Date().getFullYear()} <a href={'http://nklein.info'} target={'_blank'}>Nick Klein</a>
         </footer>
       </div>
     </>

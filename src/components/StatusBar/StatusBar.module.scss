@@ -12,33 +12,61 @@
     display: flex;
     align-items: center;
 
-    .inputContainer  {
-      display: flex;
-      align-items: center;
-      margin: 0 1rem;
+    .button {
+      padding: 11px 14px;
+      line-height: 1rem;
+      font-weight: 700;
+    }
 
-      .label {
-        white-space: nowrap;
-        margin: 0 0.5rem;
+    .spacer {
+      width: 1rem;
+    }
+
+    .input  {
+      max-width: 8rem;
+
+      &:disabled, &[readonly] {
+        background-color: $disabledGrey;
+        opacity: 1;
+      }
+    }
+
+    &.mobile {
+      display: none;
+    }
+
+    &.desktop {
+      display: inherit;
+    }
+  }
+}
+
+.drawerContainer {
+  .drawerHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 600;
+  }
+  .drawerContents {
+    padding: 1rem;
+
+    .spacer {
+      width: 1rem;
+      padding: 0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: $mdBreakpoint) {
+  .container {
+    .rightContainer  {
+      &.mobile {
+        display: inherit;
       }
 
-      .input  {
-        // display: block;
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        color: $black;
-        background-color: $white;
-        background-clip: padding-box;
-        border: 1px solid $lightGrey;
-        border-radius: .25rem;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-        &:disabled, &[readonly] {
-          background-color: $disabledGrey;
-          opacity: 1;
-        }
+      &.desktop {
+        display: none;
       }
     }
   }

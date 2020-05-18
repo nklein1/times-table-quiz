@@ -4,6 +4,7 @@ import React from 'react';
 
 import Table from '../Table/Table.jsx';
 import StatusBar from '../StatusBar/StatusBar.jsx';
+import { getRandomString } from '../../utils/utils.js';
 import styles from './Quiz.module.scss';
 
 class Quiz extends React.PureComponent {
@@ -11,26 +12,27 @@ class Quiz extends React.PureComponent {
     super(props);
 
     this.state = {
-        tableSize: 12,
-        // totalCells: 9,
-        totalCells: 121,
-        finishedCells: 0,
-        seconds: '00',
-        minutes: '0',
-        hours: '',
-        isRunning: false,
-        isComplete: false
+      tableSize: 12,
+      totalCells: 121,
+      finishedCells: 0,
+      seconds: '00',
+      minutes: '0',
+      hours: '',
+      isRunning: false,
+      isComplete: false,
+      tableKey: 'table-' + getRandomString()
     }
+  }
+
+  componentDidMount() {
+    this.setState({totalCells: this.state.tableSize*this.state.tableSize-((this.state.tableSize*2)-1)})
+    clearTimeout(this.state.intervalId);
   }
 
   componentWillUnmount() {
     clearTimeout(this.state.intervalId);
   }
 
-  componentWillMount() {
-    this.setState({totalCells: this.state.tableSize*this.state.tableSize-((this.state.tableSize*2)-1)})
-    clearTimeout(this.state.intervalId);
-  }
 
   initTimer = () => {
     this.setState(
@@ -81,9 +83,9 @@ class Quiz extends React.PureComponent {
       seconds: '00',
       minutes: '0',
       hours: '0',
+      tableKey: 'table-' + getRandomString()
+      // Change the Table component key to force state refresh of Table and cell components 
     });
-    window.location.reload();
-    // TODO: Implement resetting table cells
   }
 
   resizeTable = (ev) => {
@@ -136,6 +138,7 @@ class Quiz extends React.PureComponent {
               tableSize={this.state.tableSize}
               correctInput={this.correctInput}
               incorrectInput={this.incorrectInput}
+              key={'table-' + this.state.tableKey}
           />
         </div>
       </div>
