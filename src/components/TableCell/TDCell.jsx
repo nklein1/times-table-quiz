@@ -28,8 +28,7 @@ class TableCell extends React.PureComponent {
     }
     this.setState({value: ev.target.value});
     if (parseInt(ev.target.value) === parseInt(this.props.targetValue)) {
-      this.setState({ status: 'correct', readOnly: true });
-      this.props.correctInput();
+      this.validateInput(ev);
     }
   }
 
@@ -37,13 +36,19 @@ class TableCell extends React.PureComponent {
     if (isNaN(ev.target.value)) {
       return;
     }
-    if (parseInt(ev.target.value) === parseInt(this.props.targetValue)) {
+    if (this.state.status === 'correct') {
+      // Don't mark as correct more than once
+      return true;
+    } else if (this.state.status !== 'correct' && parseInt(ev.target.value) === parseInt(this.props.targetValue)) {
+      // Mark as correct
       this.setState({ status: 'correct', readOnly: true });
       this.props.correctInput();
     } else if (ev.target.value !== '') {
+      // Mark as incorrect
       this.setState({ status: 'incorrect', readOnly: false });
       this.props.incorrectInput();
     } else {
+      // Mark as empty
       this.setState({ status: 'tbd', readOnly: false });
     }
   }
