@@ -3,7 +3,7 @@ module.exports = {
     title: `Learn To Multiply`,
     description: `Learn to multiply with this simple multiplication table quiz.`,
     author: `Nick Klein`,
-    siteUrl: `http://www.learntomultiply.com`
+    siteUrl: `https://learntomultiply.com`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -23,6 +23,14 @@ module.exports = {
         // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+
+    {
+      resolve: `gatsby-plugin-react-helmet-canonical-urls`,
+      options: {
+        siteUrl: `https://learntomultiply.com`,
+        noTrailingSlash: false
+      },
+    },
     // {
     //   resolve: `gatsby-source-filesystem`,
     //   options: {
@@ -33,12 +41,14 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: `UA-38789595-3`,
+        siteSpeedSampleRate: 100,
+        head: true
       },
     },
     {
       resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
       options: {
-        devMode: true,
+        devMode: false,
       },
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
