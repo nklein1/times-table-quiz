@@ -2,8 +2,8 @@ import React from 'react';
 // import classNames from 'classnames';
 // import PropTypes from 'prop-types';
 
-import Table from '../Table/Table.jsx';
-import StatusBar from '../StatusBar/StatusBar.jsx';
+import Table from '../Table/Table.js';
+import StatusBar from '../StatusBar/StatusBar.js';
 import { getRandomString } from '../../utils/utils.js';
 import styles from './Quiz.module.scss';
 

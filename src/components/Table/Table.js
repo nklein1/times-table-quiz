@@ -1,7 +1,7 @@
 import React from 'react';
 
-import THCell from '../TableCell/THCell.jsx';
-import TDCell from '../TableCell/TDCell.jsx';
+import THCell from '../TableCell/THCell.js';
+import TDCell from '../TableCell/TDCell.js';
 import styles from './Table.module.scss';
 
 class Table extends React.PureComponent {

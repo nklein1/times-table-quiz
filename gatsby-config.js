@@ -6,9 +6,8 @@ module.exports = {
     siteUrl: `https://learntomultiply.com`
   },
   plugins: [
-    // `gatsby-plugin-preact`,
+    `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
-    // `gatsby-transformer-json`,
     `gatsby-plugin-sass`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

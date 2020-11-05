@@ -4,15 +4,13 @@ import classNames from 'classnames';
 import { Drawer,
           Button,
           Divider,
-          FormControl,
-          InputLabel,
-          OutlinedInput,
+          TextField,
           IconButton } from '@material-ui/core';
 
 import { Settings,
           ChevronLeft } from '@material-ui/icons';
 
-import Timer from '../Timer/Timer.jsx';
+import Timer from '../Timer/Timer.js';
 import styles from './StatusBar.module.scss';
 
 const StatusBar = React.memo(function StatusBar(props) {
@@ -30,8 +28,10 @@ const StatusBar = React.memo(function StatusBar(props) {
   };
 
   const validateInput = (ev) => {
-    ev.preventDefault();
+    // ev.preventDefault();
     if (ev.target.value <= maxSize) {
+
+      console.log('ev.target.value', ev.target.value);
       setTableSize(ev.target.value);
       setError(false);
       props.resizeTable(ev);
@@ -44,22 +44,20 @@ const StatusBar = React.memo(function StatusBar(props) {
     return (
     <>
       <div className={classNames(styles.wrapfoo)}>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="tableSize">Table Size</InputLabel>
-          <OutlinedInput
-            id={'tableSize'}
+          <TextField
+            id={'tableSizeId'}
             name={'tableSize'}
             type={'number'}
             inputProps={{ 'min':2, 'max': maxSize }}
             size={'small'}
             label={'Table Size'}
             title={'Maximum table size is ' + maxSize + 'x' + maxSize}
-            classes={{input: styles.input}}
-            defaultValue={tableSize}
+            classes={{root: styles.input}}
+            variant={'outlined'}
+            value={tableSize}
             onChange={validateInput}
             readOnly={props.isRunning}
           />
-        </FormControl>
         <div className={classNames(
             styles.alert,
             !isError ? styles.hidden : ''
