@@ -12,6 +12,16 @@
     display: flex;
     align-items: center;
 
+    .wrapfoo {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+
+      .alert {
+        margin-right: 1rem;
+      }
+    }
+
     .button {
       padding: 11px 14px;
       line-height: 1rem;
@@ -23,7 +33,7 @@
     }
 
     .input  {
-      max-width: 8rem;
+      padding: 9.5px 28px 9.5px 14px;
 
       &:disabled, &[readonly] {
         background-color: $disabledGrey;
@@ -51,10 +61,40 @@
   .drawerContents {
     padding: 1rem;
 
+    .wrapfoo {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      width: 50vw;
+
+      .alert {
+        margin-top: 0.5rem;
+      }
+    }
+
     .spacer {
       width: 1rem;
       padding: 0.5rem;
     }
+
+    .input  {
+      padding: 10.5px 5rem 10.5px 14px;
+
+      &:disabled, &[readonly] {
+        background-color: $disabledGrey;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.alert {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #A20101;
+
+  &.hidden {
+    display: none;
   }
 }
 

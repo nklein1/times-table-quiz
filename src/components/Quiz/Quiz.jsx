@@ -138,7 +138,7 @@ class Quiz extends React.PureComponent {
               tableSize={this.state.tableSize}
               correctInput={this.correctInput}
               incorrectInput={this.incorrectInput}
-              key={'table-' + this.state.tableKey}
+              key={'table-foobar'}
           />
         </div>
       </div>
