@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 
 import { Drawer,
@@ -10,13 +10,15 @@ import { Drawer,
 import { Settings,
           ChevronLeft } from '@material-ui/icons';
 
+import TimerContext from '../../utils/TimerContext';
 import Timer from '../Timer/Timer.js';
 import styles from './StatusBar.module.scss';
 
 const StatusBar = React.memo(function StatusBar(props) {
+  const timer = useContext(TimerContext)
 
   const maxSize = 25;
-  const [tableSize, setTableSize] = React.useState(12);
+  const [tableSize, setTableSize] = React.useState(props.tableSize);
   const [isDrawerOpen, setDrawer] = React.useState(false);
   const [isError, setError] = React.useState(false);
  
@@ -30,8 +32,6 @@ const StatusBar = React.memo(function StatusBar(props) {
   const validateInput = (ev) => {
     // ev.preventDefault();
     if (ev.target.value <= maxSize) {
-
-      console.log('ev.target.value', ev.target.value);
       setTableSize(ev.target.value);
       setError(false);
       props.resizeTable(ev);
@@ -56,7 +56,7 @@ const StatusBar = React.memo(function StatusBar(props) {
             variant={'outlined'}
             value={tableSize}
             onChange={validateInput}
-            readOnly={props.isRunning}
+            readOnly={timer.isRunning}
           />
         <div className={classNames(
             styles.alert,
@@ -69,12 +69,12 @@ const StatusBar = React.memo(function StatusBar(props) {
       <Button disableElevation
           className={classNames(
               styles.button,
-              props.isComplete ? styles.isComplete : '',
-              props.isRunning ? styles.isRunning : '',
+              timer.isComplete ? styles.isComplete : '',
+              timer.isRunning ? styles.isRunning : '',
           )}
           color={'primary'}
           variant={'contained'}
-          disabled={(props.isRunning === true || props.isComplete === true) ? false : true}
+          disabled={(timer.isRunning === true || timer.isComplete === true) ? false : true}
           onClick={props.resetTable}>
         Reset Table
       </Button>
@@ -84,11 +84,7 @@ const StatusBar = React.memo(function StatusBar(props) {
 
   return(
     <div className={styles.container}>
-      <Timer  
-          isComplete={props.isComplete}
-          isRunning={props.isRunning}
-          minutes={props.minutes}
-          seconds={props.seconds}/>
+      <Timer />
       <div className={classNames(
           styles.rightContainer,
           styles.mobile

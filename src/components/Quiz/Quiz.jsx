@@ -1,93 +1,44 @@
 import React from 'react';
-// import classNames from 'classnames';
-// import PropTypes from 'prop-types';
 
 import Table from '../Table/Table.js';
 import StatusBar from '../StatusBar/StatusBar.js';
-import { getRandomString } from '../../utils/utils.js';
+import TimerContext from '../../utils/TimerContext';
 import styles from './Quiz.module.scss';
 
 class Quiz extends React.PureComponent {
+  static contextType = TimerContext;
+
   constructor(props) {
     super(props);
 
     this.state = {
       tableSize: 12,
       totalCells: 121,
-      finishedCells: 0,
-      seconds: '00',
-      minutes: '0',
-      hours: '',
-      isRunning: false,
-      isComplete: false,
-      tableKey: 'table-' + getRandomString()
+      finishedCells: 0
     }
   }
 
   componentDidMount() {
-    this.setState({totalCells: this.state.tableSize*this.state.tableSize-((this.state.tableSize*2)-1)})
-    clearTimeout(this.state.intervalId);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.state.intervalId);
-  }
-
-
-  initTimer = () => {
-    this.setState(
-      { initialTime: Date.now() }, 
-      this.startTimer
-    );
-  }
-
-  formatTT = (time) => {
-    if (parseInt(time) < 10) {
-      time = '0' + time;
-    }
-    return time;
-  }
-
-  runTimer = () => {
-    let timeDifference = Date.now() - this.state.initialTime;
-    let totalSeconds = Math.floor(timeDifference / 1000);
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = totalSeconds - minutes * 60;
     this.setState({
-      minutes: minutes,
-      seconds: this.formatTT(seconds)
+      totalCells: this.state.tableSize*this.state.tableSize-((this.state.tableSize*2)-1)
     })
   }
 
-  startTimer = () => {
-    const intervalId = setInterval(this.runTimer, 1000);
-    this.setState({
-      isRunning: true,
-      intervalId: intervalId 
-    });
-  }
-
-  stopTimer = () => {
-    clearTimeout(this.state.intervalId);
-    this.setState({ isRunning: false });
-  }
-
+  // Mark Table as Completed in UI
   completeTable = () => {
-    this.stopTimer();
-    this.setState({ isComplete: true });
+    this.context.setIfRunning(false);
+    this.context.setIfComplete(true);
   }
 
+  // Mark Table as Reset in UI
   resetTable = () => {
-    this.stopTimer();
-    this.setState({ 
-      seconds: '00',
-      minutes: '0',
-      hours: '0',
-      tableKey: 'table-' + getRandomString()
-      // Change the Table component key to force state refresh of Table and cell components 
-    });
+    this.context.setIfRunning(false);
+    this.context.setIfComplete(false);
+    this.context.setIfReset(true);
+    this.setState({ finishedCells: 0 });
   }
 
+  // Resize table based on user input
   resizeTable = (ev) => {
     if (ev && ev.target.value) {
       let tableSize = parseInt(ev.target.value);
@@ -99,6 +50,7 @@ class Quiz extends React.PureComponent {
     }
   }
 
+  // Callback for correctly-input value
   correctInput = () => {
     this.setState(
       { finishedCells: this.state.finishedCells + 1 },
@@ -106,16 +58,19 @@ class Quiz extends React.PureComponent {
     );
   }
 
-  anyInput = () => {
-    if (!this.state.isRunning) {
-      this.initTimer();
-    } else if (parseInt(this.state.finishedCells) === parseInt(this.state.totalCells)) {
-      this.completeTable();
-    }
-  }
-
+  // Callback for incorrectly-input value
   incorrectInput = () => {
     this.anyInput();
+  }
+
+  // Callback for all input values
+  anyInput = () => {
+    if (!this.context.isRunning) {
+      this.context.setIfRunning(true);
+    }
+    if (parseInt(this.state.finishedCells) === parseInt(this.state.totalCells)) {
+      this.completeTable();
+    }
   }
 
   render() {
@@ -123,22 +78,18 @@ class Quiz extends React.PureComponent {
       <div className={styles.container}>
         <StatusBar 
             className={styles.statusbar}
-            isComplete={this.state.isComplete}
-            isRunning={this.state.isRunning}
             tableSize={this.state.tableSize}
-            minutes={this.state.minutes}
-            seconds={this.state.seconds}
             resizeTable={this.resizeTable}
             resetTable={this.resetTable}
          />
         <div className={styles.table}>
           <Table 
-              tableComplete={this.state.isComplete}
+              tableComplete={this.context.isComplete}
               totalCells={this.state.totalCells}
               tableSize={this.state.tableSize}
               correctInput={this.correctInput}
               incorrectInput={this.incorrectInput}
-              key={'table-foobar'}
+              key={'timesTableKey'}
           />
         </div>
       </div>
