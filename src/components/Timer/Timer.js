@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
 import TimerContext from '../../utils/TimerContext';
+import { getRandomString } from '../../utils/utils';
 import styles from './Timer.module.scss';
 
 const Timer = React.memo(function Timer(props) {
@@ -12,11 +13,6 @@ const Timer = React.memo(function Timer(props) {
   const [seconds, setSeconds] = React.useState('00');
   const [initialTime, setInitialTime] = React.useState('');
   const [intervalId, setIntervalId] = React.useState(null);
-
-  useEffect(() => {
-    clearTimeout(intervalId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // Clear timer when table is reset
   useEffect(() => {
@@ -36,20 +32,22 @@ const Timer = React.memo(function Timer(props) {
       setInitialTime(Date.now());
     } else {
       // Stop Timer
-      clearTimeout(intervalId);
+      clearInterval(intervalId);
       timer.setIfRunning(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [timer.isRunning]);
 
   // Callback to start timer when initialTime is set in state
   useEffect(() => {
     if (initialTime) {
       // Start Timer
-      const intervalId = setInterval(runTimer, 1000);
-      setIntervalId(intervalId);
+      const interval = setInterval(runTimer, 1000);
+      setIntervalId(interval);
       timer.setIfRunning(true);
     }
+    return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialTime]);
 
