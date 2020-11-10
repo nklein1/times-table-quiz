@@ -2,24 +2,24 @@ import React, { useEffect, useContext } from 'react';
 import classNames from 'classnames';
 
 import TimerContext from '../../utils/TimerContext';
-import { getRandomString } from '../../utils/utils';
 import styles from './Timer.module.scss';
 
 const Timer = React.memo(function Timer(props) {
+  const zero = '00';
   const timer = useContext(TimerContext)
 
-  const [hours, setHours] = React.useState('00');
-  const [minutes, setMinutes] = React.useState('00');
-  const [seconds, setSeconds] = React.useState('00');
+  const [hours, setHours] = React.useState(zero);
+  const [minutes, setMinutes] = React.useState(zero);
+  const [seconds, setSeconds] = React.useState(zero);
   const [initialTime, setInitialTime] = React.useState('');
   const [intervalId, setIntervalId] = React.useState(null);
 
   // Clear timer when table is reset
   useEffect(() => {
     if (timer.isReset === true) {
-      setHours('00');
-      setMinutes('00');
-      setSeconds('00');
+      setHours(zero);
+      setMinutes(zero);
+      setSeconds(zero);
       setInitialTime('');
       setIntervalId(null);
     }
